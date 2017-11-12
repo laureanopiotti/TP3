@@ -1,5 +1,5 @@
 import argparse
-from funciones import validar
+from funciones import interpreto_archivo
 import os
 
 def main():
@@ -18,7 +18,7 @@ def main():
 	if os.path.isfile(nombre_archivo) and extension == "sceql":
 		if not modo_debug:
 			print("Modo normal.")
-			validar(nombre_archivo)
+			interpreto_archivo(nombre_archivo)
 		else:
 			print("Modo debug.")
 	else:
