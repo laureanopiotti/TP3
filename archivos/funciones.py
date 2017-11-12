@@ -13,7 +13,7 @@ def leer_archivo(archivo):
 				for char in linea:
 					if char in sceql_comandos:
 						linea_a_devolver += char
-			print(linea_a_devolver)
+		return linea_a_devolver
 	except IOError:
 		return 'Problema con el archivo'
 
@@ -21,4 +21,3 @@ def interpreto_archivo(archivo):
 	"""..."""
 
 	linea_a_recorrer = leer_archivo(archivo)
-	
