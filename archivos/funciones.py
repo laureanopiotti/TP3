@@ -2,7 +2,7 @@ from Pila import Pila
 from Cola import Cola
 #Funciones
 
-def validar(archivo):
+def leer_archivo(archivo):
 	"""Recibe un archivo de tipo sceql y lo recorre caracter por caracter filtrando por los comandos validos del lenguaje SCEQL"""
 	try:
 		with open(archivo) as archivo_a_recorrer:
@@ -16,3 +16,9 @@ def validar(archivo):
 			print(linea_a_devolver)
 	except IOError:
 		return 'Problema con el archivo'
+
+def interpreto_archivo(archivo):
+	"""..."""
+
+	linea_a_recorrer = leer_archivo(interpreto_archivo)
+	
