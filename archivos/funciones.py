@@ -50,8 +50,6 @@ def interpretar_valores(archivo_limpio):
 
 		elif char == '\\':
 			e = cola.ver_primero()
-			if e == 0:
-				
 
 		elif char == '*':
 			e = cola.desencolar()
