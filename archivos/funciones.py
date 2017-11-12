@@ -48,6 +48,11 @@ def interpretar_valores(archivo_limpio):
 		elif char == '_':
 			cola = _adm(cola,'+')
 
+		elif char == '\\':
+			e = cola.ver_primero()
+			if e == 0:
+				
+
 		elif char == '*':
 			e = cola.desencolar()
 			print(chr(e),end='')
