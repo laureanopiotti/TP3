@@ -1,6 +1,6 @@
 import argparse
-from pila import pila
-from cola import cola
+from Pila import Pila
+from Cola import Cola
 
 def main():
 	"""..."""
