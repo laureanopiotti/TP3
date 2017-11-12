@@ -13,6 +13,13 @@ def main():
 	modo_debug = args.debug
 	print(nombre_archivo, modo_debug, sep="||")
 
+	extension = nombre_archivo.split(".")[1]
+
+	if extension == "sceql":
+		print("Archivo correcto.")
+	else:
+		print("Archivo incorrecto.")
+
 	"""Codigo"""
 
 main()
