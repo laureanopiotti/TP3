@@ -1,5 +1,5 @@
 class Cola:
-	"""Representa a una cola, con operaciones de encolar, desencolar y ver si esta vacia o no. El primero en ser encolado es también el primero en ser desencolado."""
+	"""Representa a una cola, con operaciones de encolar, desencolar, ver si esta vacia o no y ver primero. El primero en ser encolado es también el primero en ser desencolado."""
 	def __init__(self):
 		"""Crea una cola vacía."""
 		self.items = []
@@ -17,3 +17,9 @@ class Cola:
 	def esta_vacia(self):
 		"""Devuelve True si la cola esta vacía, False si no."""
 		return len(self.items) == 0
+
+	def ver_primero(self):
+		"""Devuelve el tope de la Cola."""
+		if not self.esta_vacia:
+			return "La pila esta vacia."
+		return self.items[0]
