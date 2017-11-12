@@ -20,4 +20,65 @@ def leer_archivo(archivo):
 def interpreto_archivo(archivo):
 	"""..."""
 
-	linea_a_recorrer = leer_archivo(archivo)
+	archivo_limpio = leer_archivo(archivo)
+
+	return interpretar_valores(archivo_limpio)
+
+
+def interpretar_valores(archivo_limpio):
+	"""..."""
+
+	cola = Cola()
+	cola.encolar(0)
+	cola_aux = Cola()
+	pila1 = Pila()
+	pila2 = Pila()
+
+	for char in archivo_limpio:
+		#print(cola.ver_primero())
+		if char == '!':
+			cola.encolar(0)
+
+		elif char == '=':
+			cola.encolar(cola.desencolar())
+
+		elif char == '-':
+			cola = _adm(cola,'-')
+
+		elif char == '_':
+			cola = _adm(cola,'+')
+
+		elif char == '*':
+			e = cola.desencolar()
+			print(chr(e),end='')
+			cola.encolar(e)
+
+	return cola
+def _adm(cola,signo):
+	"""..."""
+	#print("COLA PRINCIPAL",cola)
+	cola_aux = Cola()
+	e = cola.desencolar()
+	while not cola.esta_vacia():
+		cola_aux.encolar(cola.desencolar())
+	#print("COLA AUX",cola_aux)
+	if signo == '+':
+		cola.encolar(e+1)
+	else:
+		cola.encolar(e-1)
+	while not cola_aux.esta_vacia():
+		cola.encolar(cola_aux.desencolar())
+
+	return cola 
+
+
+
+
+
+
+
+
+
+
+
+

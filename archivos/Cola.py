@@ -2,8 +2,12 @@ class Cola:
 	"""Representa a una cola, con operaciones de encolar, desencolar, ver si esta vacia o no y ver primero. El primero en ser encolado es también el primero en ser desencolado."""
 	def __init__(self):
 		"""Crea una cola vacía."""
-		self.items = [0, ]
+		self.items = []
 		self.pos_actual = 0
+
+	def __str__(self):
+		"""Muestra la cola"""
+		return str(self.items)
 
 	def encolar(self, x):
 		"""Encola el elemento x."""
