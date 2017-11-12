@@ -1,7 +1,5 @@
 import argparse
-from Pila import Pila
-from Cola import Cola
-import funciones
+from funciones import validar
 import os
 
 def main():
@@ -20,6 +18,7 @@ def main():
 	if os.path.isfile(nombre_archivo) and extension == "sceql":
 		if not modo_debug:
 			print("Modo normal.")
+			validar(nombre_archivo)
 		else:
 			print("Modo debug.")
 	else:
