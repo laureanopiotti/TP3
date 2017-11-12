@@ -14,7 +14,7 @@ def validar(archivo):
         for linea in archivo_a_recorrer:
                 linea = linea.rstrip('/n').replace(' ','')
                 for char in linea:
-                        if char in sceql_comandos>
+                        if char in sceql_comandos:
                                 linea_a_devolver += char
 
         
