@@ -7,7 +7,7 @@ def validar(archivo):
 	try:
 		with open(archivo) as archivo_a_recorrer:
 			linea_a_devolver = ""
-			sceql_comandos = dict.fromkeys(['!','=','-','_','/','\\'])
+			sceql_comandos = dict.fromkeys(['!','=','-','_','/','\\','*'])
 			for linea in archivo_a_recorrer:
 				linea = linea.rstrip('/n').replace(' ','')
 				for char in linea:
