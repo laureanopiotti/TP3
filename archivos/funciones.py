@@ -20,5 +20,5 @@ def leer_archivo(archivo):
 def interpreto_archivo(archivo):
 	"""..."""
 
-	linea_a_recorrer = leer_archivo(interpreto_archivo)
+	linea_a_recorrer = leer_archivo(archivo)
 	
