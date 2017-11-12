@@ -17,14 +17,11 @@ def main():
 
 	extension = nombre_archivo.split(".")[1]
 
-	if os.path.isfile(nombre_archivo):		
-		if extension == "sceql":
-			if not modo_debug:
-				print("Modo normal.")
-			else:
-				print("Modo debug.")
+	if os.path.isfile(nombre_archivo) and extension == "sceql":
+		if not modo_debug:
+			print("Modo normal.")
 		else:
-			print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
+			print("Modo debug.")
 	else:
 		print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
 
