@@ -1,6 +1,8 @@
 import argparse
 from Pila import Pila
 from Cola import Cola
+import funciones
+import os
 
 def main():
 	"""..."""
@@ -15,11 +17,15 @@ def main():
 
 	extension = nombre_archivo.split(".")[1]
 
-	if extension == "sceql":
-		print("Archivo correcto.")
+	if os.path.isfile(nombre_archivo):		
+		if extension == "sceql":
+			if not modo_debug:
+				print("Modo normal.")
+			else:
+				print("Modo debug.")
+		else:
+			print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
 	else:
-		print("Archivo incorrecto.")
-
-	"""Codigo"""
+		print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
 
 main()
