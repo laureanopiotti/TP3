@@ -74,8 +74,8 @@ def interpretar_valores(archivo_limpio, dic_recibido):
 
 		elif char == '\\':
 			e = cola.ver_primero()			
-			if e == 0:
-				index = dic_aux[index] + 1
+				if e == 0:
+					index = dic_aux[index] + 1
 				#print("Doble barra", index)
 
 		elif char == '/':
