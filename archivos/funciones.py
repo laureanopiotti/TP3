@@ -5,6 +5,10 @@ from Cola import Cola
 def leer_archivo(archivo):
 	"""Recibe un archivo de tipo sceql y lo recorre caracter por caracter filtrando por los comandos validos del lenguaje SCEQL"""
 	try:
+		dic = {}
+		lista = []
+		index = 0
+		cont = 0
 		with open(archivo) as archivo_a_recorrer:
 			linea_a_devolver = ""
 			sceql_comandos = dict.fromkeys(['!','=','-','_','/','\\','*'])
@@ -13,19 +17,34 @@ def leer_archivo(archivo):
 				for char in linea:
 					if char in sceql_comandos:
 						linea_a_devolver += char
-		return linea_a_devolver
+		
+		#print(len(linea_a_devolver))
+		for char in linea_a_devolver:
+			if char == '\\':
+				cont+=1
+				lista.append(index)
+			elif char == '/':
+				cont+=1
+				dic[index] = lista.pop()
+			index += 1
+
+		#print(cont)
+		if len(lista):
+			raise IndexError("Archivo Incorrecto.")
+		#print(dic)
+		return linea_a_devolver, dic
 	except IOError:
 		return 'Problema con el archivo'
 
 def interpreto_archivo(archivo):
 	"""..."""
 
-	archivo_limpio = leer_archivo(archivo)
+	archivo_limpio, dic = leer_archivo(archivo)
 
-	return interpretar_valores(archivo_limpio)
+	return interpretar_valores(archivo_limpio, dic)
 
 
-def interpretar_valores(archivo_limpio):
+def interpretar_valores(archivo_limpio, dic_recibido):
 	"""..."""
 
 	cola = Cola()
@@ -33,9 +52,14 @@ def interpretar_valores(archivo_limpio):
 	cola_aux = Cola()
 	pila1 = Pila()
 	pila2 = Pila()
+	dic_aux = {}
 
-	for char in archivo_limpio:
-		#print(cola.ver_primero())
+	for clave, valor in dic_recibido.items():
+		dic_aux[valor] = clave
+
+
+	for index, char in enumerate(archivo_limpio):
+		#print(index, char, cola)
 		if char == '!':
 			cola.encolar(0)
 
@@ -49,7 +73,14 @@ def interpretar_valores(archivo_limpio):
 			cola = _adm(cola,'+')
 
 		elif char == '\\':
-			e = cola.ver_primero()
+			e = cola.ver_primero()			
+			if e == 0:
+				index = dic_aux[index] + 1
+				#print("Doble barra", index)
+
+		elif char == '/':
+			index = dic_recibido[index]
+			#print("Barra Simple", index)
 
 		elif char == '*':
 			e = cola.desencolar()
@@ -57,6 +88,7 @@ def interpretar_valores(archivo_limpio):
 			cola.encolar(e)
 
 	return cola
+
 def _adm(cola,signo):
 	"""..."""
 	#print("COLA PRINCIPAL",cola)
