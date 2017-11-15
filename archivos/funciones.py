@@ -22,12 +22,16 @@ def leer_archivo(archivo):
 		#print(len(linea_a_devolver))
 		for char in linea_a_devolver:
 			if char == '\\':
-				cont+=1
+				cont += 1 
 				lista.append(index)
 			elif char == '/':
-				cont+=1
+				cont += 1 
 				dic[index] = lista.pop()
 			index += 1
+
+		#print("DICCIONARIO: ",dic)
+		#print("Numero de claves del dic:", cont)
+
 
 		#print(cont)
 		if len(lista):
@@ -66,9 +70,9 @@ def interpretar_valores(archivo_limpio, dic_recibido):
 		#print(index, char, cola)
 		char = archivo_limpio.jose(indice)
 		print("CHAR",char,"COLA",cola,"INDICE",indice)
-		#while True:
-		#	ingreso = input("Apreta enter:")
-		#	break
+		while True:
+			ingreso = input("Apreta enter:")
+			break
 		if char == '!':
 			cola.encolar(0)
 

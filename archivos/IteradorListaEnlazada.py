@@ -3,7 +3,6 @@ class _IteradorListaEnlazada:
 	def __init__(self, prim):
 		"""..."""
 		self.actual = prim
-		self.indice = 0
 
 	def __next__(self):
 		"""..."""
@@ -13,7 +12,3 @@ class _IteradorListaEnlazada:
 		dato = self.actual.dato
 		self.actual = self.actual.prox
 		return dato
-
-	def prev(self):
-		"""..."""
-
