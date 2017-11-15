@@ -1,5 +1,6 @@
 from Pila import Pila
 from Cola import Cola
+from ListaEnlazada import ListaEnlazada
 #Funciones
 
 def leer_archivo(archivo):
@@ -10,13 +11,13 @@ def leer_archivo(archivo):
 		index = 0
 		cont = 0
 		with open(archivo) as archivo_a_recorrer:
-			linea_a_devolver = ""
+			linea_a_devolver = ListaEnlazada()
 			sceql_comandos = dict.fromkeys(['!','=','-','_','/','\\','*'])
 			for linea in archivo_a_recorrer:
 				linea = linea.rstrip('/n').replace(' ','')
 				for char in linea:
 					if char in sceql_comandos:
-						linea_a_devolver += char
+						linea_a_devolver.append(char)
 		
 		#print(len(linea_a_devolver))
 		for char in linea_a_devolver:
@@ -57,9 +58,17 @@ def interpretar_valores(archivo_limpio, dic_recibido):
 	for clave, valor in dic_recibido.items():
 		dic_aux[valor] = clave
 
-
-	for index, char in enumerate(archivo_limpio):
+	indice = 0
+	#print(archivo_limpio.len)
+	longitud = archivo_limpio.len()
+	while indice != (longitud - 1):
+	#for index, char in enumerate(archivo_limpio):
 		#print(index, char, cola)
+		char = archivo_limpio.jose(indice)
+		print("CHAR",char,"COLA",cola,"INDICE",indice)
+		#while True:
+		#	ingreso = input("Apreta enter:")
+		#	break
 		if char == '!':
 			cola.encolar(0)
 
@@ -74,18 +83,22 @@ def interpretar_valores(archivo_limpio, dic_recibido):
 
 		elif char == '\\':
 			e = cola.ver_primero()			
-				if e == 0:
-					index = dic_aux[index] + 1
+			if e == 0:
+				indice = dic_aux[indice] + 1
+				continue
 				#print("Doble barra", index)
 
 		elif char == '/':
-			index = dic_recibido[index]
+			indice = dic_recibido[indice]
+			continue
 			#print("Barra Simple", index)
 
 		elif char == '*':
 			e = cola.desencolar()
 			print(chr(e),end='')
 			cola.encolar(e)
+
+		indice += 1
 
 	return cola
 
