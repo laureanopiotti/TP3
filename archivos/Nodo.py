@@ -1,4 +1,4 @@
-class _Nodo:
+class Nodo:
 	"""..."""
 	def __init__(self, dato = None, prox = None, pos = 0):
 		"""..."""
