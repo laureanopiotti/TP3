@@ -72,7 +72,6 @@ class Interprete:
 
 		while self.pos_act != (longitud - 1):
 			char = self.contenido[self.pos_act]
-			print("DEBUG",self.contenido[(self.pos_act - 5 )% 5: (self.pos_act +5) % 5])
 			if char == '!':
 				self.cola.encolar(0)
 
@@ -111,12 +110,6 @@ class Interprete:
 
 		while self.pos_act != (longitud - 1):
 			char = self.contenido[self.pos_act]
-			#print(self.cola)
-
-			#if self.pos_act < 5:
-			#	print("DEBUG",self.contenido[:self.pos_act +5])
-			#else:
-			#	print("DEBUG",self.contenido[self.pos_act -5:])
 
 			if char == '!':
 				self.cola.encolar(0)
