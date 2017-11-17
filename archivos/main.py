@@ -16,17 +16,10 @@ def main():
 	extension = nombre_archivo.split(".")[1]
 
 	if os.path.isfile(nombre_archivo) and extension == "sceql":
-		if not modo_debug:
-			interprete = Interprete()
-			interprete.leer_archivo(nombre_archivo)
-			interprete.interpretar_valores()
-			print(interprete)
-
-		else:
-			interprete = Interprete()
-			interprete.leer_archivo(nombre_archivo)
-			interprete.interpretar_valores_debug()
-
+		interprete = Interprete()
+		interprete.leer_archivo(nombre_archivo)
+		interprete.interpretar_valores(modo_debug)
+		print(interprete)
 
 	else:
 		print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
