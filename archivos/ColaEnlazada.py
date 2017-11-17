@@ -14,7 +14,7 @@ class ColaEnlazada:
 		"""Muestra el contenido de la Cola Enlazada."""
 		n_ant = self.primero
 		nodos = ''
-		delimitador = '-->'
+		delimitador = '->'
 		while n_ant is not None:
 			nodos += str(n_ant.dato)
 			if n_ant.prox is not None:

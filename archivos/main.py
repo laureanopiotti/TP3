@@ -3,7 +3,8 @@ import os
 from Interprete import Interprete
 
 def main():
-	"""Interpreta de la consola lo ingresado por el usuario."""
+	"""Funcion principal que llamara a Interprete para ejecutar el archivo SCEQL
+	Recibe como argumento el archivo ingresado por el usuario por consola."""
 	parser = argparse.ArgumentParser(description='Interprete de codigo SCEQL')
 	parser.add_argument('archivo', metavar='archivo', help='archivo con codigo a interpretar')
 	parser.add_argument('-d', '--debug', action='store_true', help='modo debug')
@@ -11,21 +12,17 @@ def main():
 
 	nombre_archivo = args.archivo
 	modo_debug = args.debug
-	print(nombre_archivo, modo_debug, sep="||")
 
 	extension = nombre_archivo.split(".")[1]
 
 	if os.path.isfile(nombre_archivo) and extension == "sceql":
 		if not modo_debug:
-			print("Modo normal.")
-
 			interprete = Interprete()
 			interprete.leer_archivo(nombre_archivo)
 			interprete.interpretar_valores()
 			print(interprete)
 
 		else:
-			print("Modo debug.")
 			interprete = Interprete()
 			interprete.leer_archivo(nombre_archivo)
 			interprete.interpretar_valores_debug()
