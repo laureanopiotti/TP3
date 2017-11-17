@@ -1,4 +1,3 @@
-from Cola import Cola
 from ColaEnlazada import ColaEnlazada
 
 class Interprete:
@@ -21,12 +20,12 @@ class Interprete:
 
 	def __str__(self):
 		"""..."""
-		return str(self.cola),self.traduccion
+		return self.traduccion
 
 
 	def __repr__(self):
 		"""..."""
-		return str(self.cola)
+		return self.traduccion
 
 	def leer_archivo(self,nombre_archivo):
 		"""Recibe un archivo de tipo SCEQL y lo recorre caracter por caracter filtrando por los comandos validos del lenguaje SCEQL y lo almacena y self.contenido.
@@ -72,15 +71,8 @@ class Interprete:
 		cola_aux = ColaEnlazada()
 
 		while self.pos_act != (longitud - 1):
-			#print("DEBUG",self.cola)
-			print("DEBUG pos_act",self.pos_act)
-		#for index, char in enumerate(archivo_limpio):
-			#print(index, char, cola)
 			char = self.contenido[self.pos_act]
-			print("CHAR",char)
-			#while True:
-			#	ingreso = input("Apreta enter:")
-			#	break
+			print("DEBUG",self.contenido[(self.pos_act - 5 )% 5: (self.pos_act +5) % 5])
 			if char == '!':
 				self.cola.encolar(0)
 
@@ -98,17 +90,69 @@ class Interprete:
 				if e == 0:
 					self.pos_act = self.dic_aux[self.pos_act] + 1
 					continue
-					#print("Doble barra", index)
 
 			elif char == '/':
 				self.pos_act = self.dic[self.pos_act]
 				continue
-				#print("Barra Simple", index)
 
 			elif char == '*':
 				e = self.cola.desencolar()
-				print("DEBUG",e)
 				self.traduccion += chr(e)
 				self.cola.encolar(e)
+
+			self.pos_act += 1
+
+	def interpretar_valores_debug(self):
+		"""..."""
+
+		indice = 0
+		longitud = self.len
+		cola_aux = ColaEnlazada()
+
+		while self.pos_act != (longitud - 1):
+			char = self.contenido[self.pos_act]
+			#print(self.cola)
+
+			#if self.pos_act < 5:
+			#	print("DEBUG",self.contenido[:self.pos_act +5])
+			#else:
+			#	print("DEBUG",self.contenido[self.pos_act -5:])
+
+			if char == '!':
+				self.cola.encolar(0)
+
+			elif char == '=':
+				self.cola.encolar(self.cola.desencolar())
+
+			elif char == '_':
+				self.cola.incrementar_primero()
+
+			elif char == '-':
+				self.cola.decrementar_primero()
+
+			elif char == '\\':
+				e = self.cola.ver_primero()			
+				if e == 0:
+					self.pos_act = self.dic_aux[self.pos_act] + 1
+					continue
+
+			elif char == '/':
+				self.pos_act = self.dic[self.pos_act]
+				continue
+
+			elif char == '*':
+				e = self.cola.desencolar()
+				self.traduccion += chr(e)
+				self.cola.encolar(e)
+
+			ingreso = True
+			while ingreso:
+				input()
+				print(self.cola)
+				print(self.traduccion)
+				print(self.contenido[:(self.pos_act + 1)% self.len])
+				print(" "*self.pos_act + "^")
+
+				ingreso = False
 
 			self.pos_act += 1

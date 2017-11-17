@@ -10,6 +10,19 @@ class ColaEnlazada:
 		self.primero = None
 		self.ultimo = None
 
+	def __repr__(self):
+		"""..."""
+		n_ant = self.primero
+		nodos = ''
+		delimitador = '-->'
+		while n_ant is not None:
+			nodos += str(n_ant.dato)
+			if n_ant.prox is not None:
+				nodos += delimitador
+			n_ant = n_ant.prox
+		return nodos
+
+
 	def encolar(self, x):
 		"""Encola el elemento x."""
 		nuevo = Nodo(x)

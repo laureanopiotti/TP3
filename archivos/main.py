@@ -1,6 +1,6 @@
 import argparse
-from funciones import interpreto_archivo
 import os
+from Interprete import Interprete
 
 def main():
 	"""..."""
@@ -18,9 +18,19 @@ def main():
 	if os.path.isfile(nombre_archivo) and extension == "sceql":
 		if not modo_debug:
 			print("Modo normal.")
-			interpreto_archivo(nombre_archivo)
+
+			interprete = Interprete()
+			interprete.leer_archivo(nombre_archivo)
+			interprete.interpretar_valores()
+			print(interprete)
+
 		else:
 			print("Modo debug.")
+			interprete = Interprete()
+			interprete.leer_archivo(nombre_archivo)
+			interprete.interpretar_valores_debug()
+
+
 	else:
 		print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
 
