@@ -1,10 +1,10 @@
 from ColaEnlazada import ColaEnlazada
 
 class Interprete:
-	"""..."""
+	"""Modela un Interprete SCEQL."""
 
 	def __init__(self):
-		"""..."""
+		"""Constructor del Interprete."""
 		self.pos_act = 0
 		self.cola = ColaEnlazada()
 		self.contenido = ""
@@ -19,12 +19,12 @@ class Interprete:
 
 
 	def __str__(self):
-		"""..."""
+		"""Muestra la lista"""
 		return self.traduccion
 
 
 	def __repr__(self):
-		"""..."""
+		"""Muestra la lista"""
 		return self.traduccion
 
 	def leer_archivo(self,nombre_archivo):
@@ -64,7 +64,7 @@ class Interprete:
 			raise ValueError("Archivo incorrecto.") #No hay la misma cantidad de barras
 
 	def interpretar_valores(self):
-		"""..."""
+		"""Recorre la cadena y dependiendo que es lo que encuntra va modificando la Cola Enlazada."""
 
 		indice = 0
 		longitud = self.len
@@ -102,7 +102,7 @@ class Interprete:
 			self.pos_act += 1
 
 	def interpretar_valores_debug(self):
-		"""..."""
+		"""Recorre la cadena, en modo debug, imprimindo el puntero y la Cola Enlazada, y dependiendo que es lo que encuntra va modificando la Cola Enlazada."""
 
 		indice = 0
 		longitud = self.len

@@ -11,7 +11,7 @@ class ColaEnlazada:
 		self.ultimo = None
 
 	def __repr__(self):
-		"""..."""
+		"""Muestra el contenido de la Cola Enlazada."""
 		n_ant = self.primero
 		nodos = ''
 		delimitador = '-->'
@@ -49,15 +49,15 @@ class ColaEnlazada:
 		return self.primero is None
 
 	def ver_primero(self):
-		"""..."""
+		"""Devuelve el primero de la Cola."""
 		return self.primero.dato
 
 	def incrementar_primero(self):
-		"""..."""
+		"""Incrementa el primero, en caso de ser 256 incrementa 0."""
 		dato = self.primero.dato
 		self.primero.dato = (dato % 256) + 1 
 
 	def decrementar_primero(self):
-		"""..."""
+		"""Decrementa el primero, en caso de ser 0 decrementa 255"""
 		dato = self.primero.dato
 		self.primero.dato = (dato % 256) - 1 

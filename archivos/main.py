@@ -3,7 +3,7 @@ import os
 from Interprete import Interprete
 
 def main():
-	"""..."""
+	"""Interpreta de la consola lo ingresado por el usuario."""
 	parser = argparse.ArgumentParser(description='Interprete de codigo SCEQL')
 	parser.add_argument('archivo', metavar='archivo', help='archivo con codigo a interpretar')
 	parser.add_argument('-d', '--debug', action='store_true', help='modo debug')
