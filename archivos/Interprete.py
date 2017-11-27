@@ -1,4 +1,14 @@
 from ColaEnlazada import ColaEnlazada
+from Pila import Pila
+
+#Variables Globales
+GLOBAL1 = '!'
+GLOBAL2 = '='
+GLOBAL3 = '_'
+GLOBAL4 = '-'
+GLOBAL5 = '\\'
+GLOBAL6 = '/'
+GLOBAL7 = '*'
 
 class Interprete:
 	"""Modela un Interprete SCEQL."""
@@ -8,11 +18,12 @@ class Interprete:
 		self.pos_act = 0
 		self.cola = ColaEnlazada()
 		self.contenido = ""
-		self.barras_cerradas = {}
-		self.barras_abiertas = {}
+		self.barras = {}
 		self.len = 0
 
 		self.traduccion = ""
+
+		self.veoSaltos = ""
 
 		#Encolar un 0 a la ColaEnlazada
 		self.cola.encolar(0)
@@ -31,7 +42,7 @@ class Interprete:
 		"""Recibe un archivo de tipo SCEQL y lo recorre caracter por caracter filtrando por los comandos validos del lenguaje SCEQL y lo almacena en self.contenido.
 		Agregamos las posiciones de las barras en self.barras_cerradas y self.barras_abiertas"""
 		
-		lista = []
+		posicion_barras_abre = Pila()
 		#Abrir el archivo a interpretar y obtener solo los caracteres permitidos por el lenguaje SCEQL
 		try:
 			with open(nombre_archivo) as archivo_a_recorrer:
@@ -41,6 +52,7 @@ class Interprete:
 					for char in linea:
 						if char in sceql_comandos:
 							self.contenido += char
+
 		except IOError:
 			print("Problema con el archivo")
 		
@@ -48,19 +60,17 @@ class Interprete:
 			#Agregar al diccionario como clave la posicion de la barra que cierra y el valor como la barra que abre correspondiente
 			for char in self.contenido:
 				if char == '\\':
-					lista.append(self.len)
+					posicion_barras_abre.apilar(self.len)
 				elif char == '/':
-					self.barras_cerradas[self.len] = lista.pop()
+					valor_barra_abre = posicion_barras_abre.desapilar()
+					self.barras[self.len] = valor_barra_abre
+					self.barras[valor_barra_abre] = self.len
 				self.len += 1
 		except ValueError:
 			print("Archivo incorrecto")#No hay la misma cantidad de barras
 
-		#Agregar al diccionario como clave la posicion de la barra que abre y el valor como la barra que cierra correspondiente
-		for clave, valor in self.barras_cerradas.items():
-			self.barras_abiertas[valor] = clave
-
 		#Chequear que lista esta vacia (no quedo ninguna barra sin pareja)
-		if len(lista):
+		if not posicion_barras_abre.esta_vacia():
 			raise ValueError("Archivo incorrecto.") #No hay la misma cantidad de barras
 
 	def interpretar_valores(self, modo_debug):
@@ -71,29 +81,29 @@ class Interprete:
 
 		while self.pos_act != (longitud - 1):
 			char = self.contenido[self.pos_act]
-			if char == '!':
+			if char == GLOBAL1:
 				self.cola.encolar(0)
 
-			elif char == '=':
+			elif char == GLOBAL2:
 				self.cola.encolar(self.cola.desencolar())
 
-			elif char == '_':
+			elif char == GLOBAL3:
 				self.cola.incrementar_primero()
 
-			elif char == '-':
+			elif char == GLOBAL4:
 				self.cola.decrementar_primero()
 
-			elif char == '\\':
+			elif char == GLOBAL5:
 				e = self.cola.ver_primero()			
 				if e == 0:
-					self.pos_act = self.barras_abiertas[self.pos_act] + 1
+					self.pos_act = self.barras[self.pos_act] + 1
 					continue
 
-			elif char == '/':
-				self.pos_act = self.barras_cerradas[self.pos_act]
+			elif char == GLOBAL6:
+				self.pos_act = self.barras[self.pos_act]
 				continue
 
-			elif char == '*':
+			elif char == GLOBAL7:
 				e = self.cola.desencolar()
 				self.traduccion += chr(e)
 				self.cola.encolar(e)

@@ -55,9 +55,9 @@ class ColaEnlazada:
 	def incrementar_primero(self):
 		"""Incrementa el primero, en caso de ser 256 incrementa 0."""
 		dato = self.primero.dato
-		self.primero.dato = (dato % 256) + 1 
+		self.primero.dato = (dato + 1) % 256 
 
 	def decrementar_primero(self):
 		"""Decrementa el primero, en caso de ser 0 decrementa 255"""
 		dato = self.primero.dato
-		self.primero.dato = (dato % 256) - 1 
+		self.primero.dato = (dato - 1) % 256 
