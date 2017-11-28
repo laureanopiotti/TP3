@@ -19,7 +19,6 @@ def main():
 		interprete = Interprete()
 		interprete.leer_archivo(nombre_archivo)
 		interprete.interpretar_valores(modo_debug)
-		print(interprete)
 
 	else:
 		print("El archivo ingresado es incorrecto, por favor ingrese un archivo correcto.")
