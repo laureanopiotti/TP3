@@ -79,7 +79,7 @@ class Interprete:
 
 		longitud = self.len
 
-		while self.pos_act != (longitud - 1):
+		while self.pos_act != longitud:
 			char = self.contenido[self.pos_act]
 			if char == GLOBAL1:
 				self.cola.encolar(0)
@@ -106,13 +106,15 @@ class Interprete:
 			elif char == GLOBAL7:
 				e = self.cola.desencolar()
 				self.traduccion += chr(e)
+				if not modo_debug:
+					print(chr(e), end="")
 				self.cola.encolar(e)
 
 			if modo_debug:
 				while True:
 					print("Cola ",self.cola)
 					print(self.traduccion)
-					print(self.contenido[:(self.pos_act + 1)% self.len])
+					print(self.contenido[:(self.pos_act + 1) % self.len])
 					print(" "*self.pos_act + "^")
 
 					ingreso = input("Presione Enter para continuar")
